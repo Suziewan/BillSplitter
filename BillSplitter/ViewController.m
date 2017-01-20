@@ -21,17 +21,21 @@
 - (IBAction)calculateSplitAmount:(UIButton *)sender {
     
     NSString *billAmount = self.billAmount.text;
-    NSInteger billAmountAsInt = [billAmount intValue];
+    double billAmountAsInt = [billAmount intValue];
     NSLog(@"The total bill amount is %ld", (long)billAmountAsInt);
     
-    float numberOfPeople = self.numberOfPeople.value;
-
-    
+    int numberOfPeople = self.numberOfPeople.value;
     int amountPerPerson = billAmountAsInt / numberOfPeople;
     
-    NSLog(@"Each person should pay %d", amountPerPerson);
+    NSString *totalPerPerson = [NSNumberFormatter localizedStringFromNumber:@(amountPerPerson) numberStyle:NSNumberFormatterCurrencyAccountingStyle];
     
-    self.amountPerPerson.text = [NSString stringWithFormat:@"Each person should pay $%d.", amountPerPerson];
+    
+    NSNumberFormatter *f = [[NSNumberFormatter alloc] init];
+    f.numberStyle = NSNumberFormatterCurrencyAccountingStyle;
+    NSString *s1 = [f stringFromNumber:@(amountPerPerson)];
+    
+    
+    self.amountPerPerson.text = [NSString stringWithFormat:@"Each person should pay %@", s1];
 }
 
 
