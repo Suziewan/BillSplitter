@@ -10,6 +10,6 @@
 
 @interface ViewController : UIViewController
 
-
+- (IBAction)calculateSplitAmount:(UIButton *)sender;
 @end
 
